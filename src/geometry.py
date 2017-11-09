@@ -62,6 +62,15 @@ class Point3D:
     def to_vector(self):
         return Vector3D(self.x, self.y, self.z)
 
+    def scale(self, s):
+        return Point3D(self.x * s, self.y * s, self.z * s)
+
+    def __add__(self, other):
+        """
+        :type other: Point3D
+        """
+        return Point3D(self.x + other.x, self.y + other.y, self.z + other.z)
+
     def __str__(self):
         return "({0},{1},{2})".format(self.x, self.y, self.z)
 

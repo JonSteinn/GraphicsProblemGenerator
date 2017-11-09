@@ -9,7 +9,7 @@ def create_tex(problems, title):
     with open('../tex/out/lighting.tex', 'w+') as f:
         with open('../tex/template/start_content.tex', 'r') as tmp_f:
             for line in enumerate(tmp_f):
-                if line[0] == 30:
+                if line[0] == 23:
                     f.write(line[1].replace('X', title))
                 else:
                     f.write(line[1])
