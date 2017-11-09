@@ -1,2 +1,9 @@
 # Computer Graphics Problem Generator
-TODO
+
+Generates random computer graphics math problem.
+
+## How to run
+
+```bash
+py src/make_all.py
+```

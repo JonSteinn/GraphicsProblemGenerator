@@ -1,12 +1,17 @@
 import random
 
+import os
+
 from geometry import Point2D
 
 
 def create_tex(problems, title):
     lis = []
-    with open('../tex/out/rasterization.tex', 'w+') as f:
-        with open('../tex/template/start_content.tex', 'r') as tmp_f:
+    directory = os.path.dirname('tex/out/collision.tex')
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    with open('tex/out/rasterization.tex', 'w+') as f:
+        with open('tex/template/start_content.tex', 'r') as tmp_f:
             for line in enumerate(tmp_f):
                 if line[0] == 23:
                     f.write(line[1].replace('X', title))

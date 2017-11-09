@@ -1,13 +1,18 @@
 import random
 from math import sqrt
 
+import os
+
 from geometry import Point3D, Vector3D
 
 
 def create_tex(problems, title):
     lis = []
-    with open('../tex/out/lighting.tex', 'w+') as f:
-        with open('../tex/template/start_content.tex', 'r') as tmp_f:
+    directory = os.path.dirname('tex/out/collision.tex')
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    with open('tex/out/lighting.tex', 'w+') as f:
+        with open('tex/template/start_content.tex', 'r') as tmp_f:
             for line in enumerate(tmp_f):
                 if line[0] == 23:
                     f.write(line[1].replace('X', title))
@@ -89,6 +94,11 @@ def generate():
         cam = Point3D(random.randint(-100, 100), random.randint(-100, 100), random.randint(-100, 100))
         light = Point3D(random.randint(-100, 100), random.randint(-100, 100), random.randint(-100, 100))
         if vertex_pos != cam and vertex_pos != light and cam != light:
+            v = vertex_pos.vector_to(cam)
+            s = vertex_pos.vector_to(light)
+            h = v + s
+            if vertex_normal.dot_self() == 0 or s.dot_self() == 0 or h.dot_self() == 0:
+                continue
             problem['v_pos'] = vertex_pos
             problem['v_norm'] = vertex_normal
             problem['c_pos'] = cam
