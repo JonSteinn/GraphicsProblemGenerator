@@ -1,0 +1,45 @@
+\documentclass[11pt,a4paper,notitlepage]{article}
+\usepackage[margin = 1.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage{inconsolata}
+\usepackage[icelandic,english]{babel}
+\selectlanguage{english}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\hypersetup{%
+colorlinks=true,%
+linkcolor=black,%
+citecolor=black,%
+filecolor=black,%
+urlcolor=black,%
+}
+\usepackage[all]{hypcap}
+\usepackage{graphicx}
+\newcommand{\maketitlepage}{%
+\begin{titlepage}%
+\begin{center}%
+\ \\[2.5cm]%
+\includegraphics[width=0.65\textwidth]{rulogo.png}\\[2.5cm]%
+\textsc{\Huge Computer Graphics}\\[1.5cm]%
+\textsc{\huge X}\\[0.3cm]%
+\textsc{\Large Solutions}\\[1.5cm]%
+\textsc{\LARGE \today}\\[4cm]%
+\textsc{\huge Jón Steinn Elíasson}\\[.3cm]%
+\text{jonsteinn@gmail.com}%
+\end{center}%
+\vfill%
+\end{titlepage}%
+}
+\begin{document}
+\maketitlepage%
+\tableofcontents%
+\vfill%
+\clearpage%
+\section{Problems}
