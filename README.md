@@ -2,6 +2,13 @@
 
 Generates random computer graphics math problem.
 
+## Problem types
+* 2d collision (point and line)
+* Camera translation
+* Lighting (Phong lighting, single light)
+* Rasterization
+* Bezier curves
+
 ## How to run
 
 ```bash
