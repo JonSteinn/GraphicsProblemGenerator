@@ -71,7 +71,7 @@ def binom(n, k):
     :type n: int
     :type k: int
     """
-    return factorial(n) / factorial(k) / factorial(n - k)
+    return factorial(n) // factorial(k) // factorial(n - k)
 
 
 def solve(pnts, time_ratio):

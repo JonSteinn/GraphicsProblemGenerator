@@ -1,10 +1,10 @@
+import sys
 from unittest import TestCase
 
-import sys
 sys.path.append("../src")
 
 from geometry import Point2D
-from rasterization import solve
+from rasterization import solve, lerp, generate
 
 
 class TestRasterization(TestCase):
@@ -37,3 +37,16 @@ class TestRasterization(TestCase):
         self.assertAlmostEqual(expected[0], s[0])
         self.assertAlmostEqual(expected[1], s[1])
         self.assertAlmostEqual(expected[2], s[2])
+
+    def test_generate(self):
+        for _i in range(100):
+            g = generate()
+            x = {g['p1'].x, g['p2'].x, g['p3'].x}
+            y = {g['p1'].y, g['p2'].y, g['p3'].y}
+            self.assertEqual(len(x), 3)
+            self.assertEqual(len(y), 3)
+            self.assertTrue(g['p'].inside_triangle(g['p1'], g['p2'], g['p3']))
+
+    def test_lerp(self):
+        self.assertAlmostEqual(lerp(5, 10, 0.5), 7.5, delta=1E-6)
+        self.assertAlmostEqual(lerp(2151.123, -9123.124, 0.123), 764.390619, delta=1E-6)

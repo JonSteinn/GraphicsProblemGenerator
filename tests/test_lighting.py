@@ -4,7 +4,7 @@ import sys
 sys.path.append("../src")
 
 from geometry import Point3D, Vector3D
-from lighting import Color, solve
+from lighting import Color, solve, generate
 
 
 class TestLighting(TestCase):
@@ -57,3 +57,10 @@ class TestLighting(TestCase):
         self.assertAlmostEqual(s.r, expected.r, delta=1E-5, msg='r')
         self.assertAlmostEqual(s.g, expected.g, delta=1E-5, msg='g')
         self.assertAlmostEqual(s.b, expected.b, delta=1E-5, msg='b')
+
+    def test_generate(self):
+        for _i in range(100):
+            g = generate()
+            self.assertFalse(g['v_pos'] == g['c_pos'])
+            self.assertFalse(g['v_pos'] == g['l_pos'])
+            self.assertFalse(g['c_pos'] == g['l_pos'])

@@ -4,7 +4,7 @@ from unittest import TestCase
 import sys
 sys.path.append("../src")
 
-from camera import solve
+from camera import solve, generate
 from geometry import Point3D, Vector3D
 
 
@@ -218,3 +218,10 @@ class TestCamera(TestCase):
         # Projection matrix
         for pm_kv in expected[4].items():
             self.assertAlmostEqual(pm.get_element(*pm_kv[0]), pm_kv[1], delta=d)
+
+    def test_generate(self):
+        for _i in range(100):
+            g = generate()
+            self.assertFalse(g['eye'] == g['look'])
+            self.assertEqual((g['eye'].vector_to(g['look'])).dot_product(g['up']), 0)
+            self.assertTrue(g['far'] > g['near'])

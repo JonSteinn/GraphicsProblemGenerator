@@ -125,9 +125,9 @@ def solve(eye, look, up, fov, aspect_ratio, near, far):
 
 def generate():
     while True:
-        problem = {'eye': Point3D(random.randint(-100, 100), random.randint(-100, 100),random.randint(-100, 100))}
+        problem = {'eye': Point3D(random.randint(-100, 100), random.randint(-100, 100), random.randint(-100, 100))}
         while True:
-            look = Point3D(random.randint(-100, 100), random.randint(-100, 100),random.randint(-100, 100))
+            look = Point3D(random.randint(-100, 100), random.randint(-100, 100), random.randint(-100, 100))
             if look != problem['eye']:
                 problem['look'] = look
                 break
