@@ -1,0 +1,1 @@
+py src/make_all.py %1
