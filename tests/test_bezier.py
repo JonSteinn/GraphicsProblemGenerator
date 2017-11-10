@@ -1,5 +1,8 @@
 from unittest import TestCase
 
+import sys
+sys.path.append("../src")
+
 from bezier import solve
 from geometry import Point3D
 

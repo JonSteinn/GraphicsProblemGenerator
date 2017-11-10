@@ -175,6 +175,3 @@ def left_right(p_low, pnts):
     """
     pnts.remove(p_low)
     return tuple(sorted(pnts, key=lambda z: z.x, reverse=False))
-
-
-create_tex(5, 'Rasterization')

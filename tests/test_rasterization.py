@@ -1,5 +1,8 @@
 from unittest import TestCase
 
+import sys
+sys.path.append("../src")
+
 from geometry import Point2D
 from rasterization import solve
 

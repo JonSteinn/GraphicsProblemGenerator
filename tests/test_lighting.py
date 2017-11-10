@@ -1,5 +1,8 @@
 from unittest import TestCase
 
+import sys
+sys.path.append("../src")
+
 from geometry import Point3D, Vector3D
 from lighting import Color, solve
 

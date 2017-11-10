@@ -1,6 +1,9 @@
 from fractions import Fraction
 from unittest import TestCase
 
+import sys
+sys.path.append("../src")
+
 from collision import Point2D, Vector2D, solve, generate
 
 

@@ -1,6 +1,9 @@
 from math import sqrt
 from unittest import TestCase
 
+import sys
+sys.path.append("../src")
+
 from camera import solve
 from geometry import Point3D, Vector3D
 
