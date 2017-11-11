@@ -44,7 +44,7 @@ def create_tex(problems, title):
 
 def single_problem(parameters):
     return 'Three vertices of a triangle have been sent through the OpenGL pipeline.' \
-           'They have the following pixel positions as well as values for the varying' \
+           'They have the following pixel positions as well as values for the varying ' \
            'variable $v_d$\n' \
            '\\begin{{center}}\n' \
            '\\begin{{tabular}}{{c|c}}\n' \

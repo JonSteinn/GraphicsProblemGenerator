@@ -56,7 +56,7 @@ def single_problem(parameters):
            '{2} and looks towards P. P has the color values: ambient {8}, ' \
            'diffuse {9} and specular {10}. It has a shininess value of ' \
            '{11}. It has the position {0} and a normal {1}. What will be ' \
-           'the blue color value for P on the screen?\n'.format(*parameters)
+           'the color value for P on the screen?\n'.format(*parameters)
 
 
 def solve(v_pos, v_normal, c_pos, l_pos, g_a, l_a, l_d, l_s, m_a, m_d, m_s, shine):
