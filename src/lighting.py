@@ -8,7 +8,7 @@ from geometry import Point3D, Vector3D
 
 def create_tex(problems, title):
     lis = []
-    directory = os.path.dirname('tex/out/collision.tex')
+    directory = os.path.dirname('tex/out/lighting.tex')
     if not os.path.exists(directory):
         os.makedirs(directory)
     with open('tex/out/lighting.tex', 'w+') as f:

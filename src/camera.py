@@ -9,7 +9,7 @@ from geometry import Vector3D, Point3D, Mat4
 
 def create_tex(problems, title):
     lis = []
-    directory = os.path.dirname('tex/out/collision.tex')
+    directory = os.path.dirname('tex/out/camera.tex')
     if not os.path.exists(directory):
         os.makedirs(directory)
     with open('tex/out/camera.tex', 'w+') as f:

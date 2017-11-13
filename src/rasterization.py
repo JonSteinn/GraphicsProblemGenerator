@@ -7,7 +7,7 @@ from geometry import Point2D
 
 def create_tex(problems, title):
     lis = []
-    directory = os.path.dirname('tex/out/collision.tex')
+    directory = os.path.dirname('tex/out/rasterization.tex')
     if not os.path.exists(directory):
         os.makedirs(directory)
     with open('tex/out/rasterization.tex', 'w+') as f:

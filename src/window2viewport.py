@@ -1,6 +1,50 @@
 import random
 
+import os
+
 from geometry import Point2D
+
+
+def create_tex(problems, title):
+    lis = []
+    directory = os.path.dirname('tex/out/window2viewport.tex')
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    with open('tex/out/window2viewport.tex', 'w+') as f:
+        with open('tex/template/start_content.tex', 'r') as tmp_f:
+            for line in enumerate(tmp_f):
+                if line[0] == 23:
+                    f.write(line[1].replace('X', title))
+                else:
+                    f.write(line[1])
+        for i in range(problems):
+            gen = generate()
+            f.write('\\subsection*{{Problem {0}}}\n'.format(i))
+            f.write('\\label{{psec:{0}}}\n'.format(i))
+            f.write('\\addcontentsline{{toc}}{{subsection}}{{\\nameref{{psec:{0}}}}}\n'.format(i))
+            p = gen['p']
+            w = gen['w']
+            v = gen['v']
+            lis.append((w, v, p))
+            f.write(single_problem(w, v, p))
+        f.write('\\section{Solutions}\n')
+        for prob in enumerate(lis):
+            f.write('\\subsection*{{Solution {0}}}\n'.format(prob[0]))
+            f.write('\\label{{ssec:{0}}}\n'.format(prob[0]))
+            f.write('\\addcontentsline{{toc}}{{subsection}}{{\\nameref{{ssec:{0}}}}}\n'.format(prob[0]))
+            f.write('{0}\n'.format(solve(*prob[1])))
+        f.write('\\end{document}\n')
+
+
+def single_problem(window, viewport, point):
+    """
+    :type window:
+    :type viewport:
+    :type point:
+    """
+    return 'Points are drawn in a 2D world window $(W.l, W.r, W.b, W.t) = {0}$. ' \
+           'In which pixels on a ${1} \\times {2}$ viewport (bottom left corner ' \
+           '$(0,0)$) will ${3}$ be rendered?'.format(window, viewport[1], viewport[3], point)
 
 
 def generate():
