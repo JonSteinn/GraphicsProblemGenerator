@@ -1,7 +1,8 @@
-from math import sqrt
+from math import sqrt, tan, pi
 from unittest import TestCase
 
 import sys
+
 sys.path.append("../src")
 
 from camera import solve, generate
@@ -188,6 +189,115 @@ class TestCamera(TestCase):
                 (2, 1): 0,
                 (2, 2): -2.066666666666667,
                 (2, 3): -24.533333333333335,
+
+                (3, 0): 0,
+                (3, 1): 0,
+                (3, 2): -1,
+                (3, 3): 0,
+            }
+        )
+
+        # U
+        self.assertAlmostEqual(u.x, expected[0][0], delta=d)
+        self.assertAlmostEqual(u.y, expected[0][1], delta=d)
+        self.assertAlmostEqual(u.z, expected[0][2], delta=d)
+
+        # V
+        self.assertAlmostEqual(v.x, expected[1][0], delta=d)
+        self.assertAlmostEqual(v.y, expected[1][1], delta=d)
+        self.assertAlmostEqual(v.z, expected[1][2], delta=d)
+
+        # N
+        self.assertAlmostEqual(n.x, expected[2][0], delta=d)
+        self.assertAlmostEqual(n.y, expected[2][1], delta=d)
+        self.assertAlmostEqual(n.z, expected[2][2], delta=d)
+
+        # View matrix
+        for vm_kv in expected[3].items():
+            self.assertAlmostEqual(vm.get_element(*vm_kv[0]), vm_kv[1], delta=d)
+
+        # Projection matrix
+        for pm_kv in expected[4].items():
+            self.assertAlmostEqual(pm.get_element(*pm_kv[0]), pm_kv[1], delta=d)
+
+    def test_solve3(self):
+        d = 1E-5
+        s = solve(
+            eye=Point3D(-1, -2, 4),
+            look=Point3D(3, 1, -2),
+            up=Vector3D(0, 1, 0),
+            fov=30,
+            aspect_ratio=16 / 9,
+            near=1,
+            far=11
+        )
+        n = s['n']
+        u = s['u']
+        v = s['v']
+        vm = s['view_mat']
+        pm = s['projection_mat']
+
+        expected = (
+            #u
+            (
+                3/sqrt(13),
+                0,
+                2/sqrt(13)
+            ),
+            #v
+            (
+                -6/sqrt(793),
+                26/sqrt(793),
+                9/sqrt(793)
+            ),
+            #n
+            (
+                -4/sqrt(61),
+                -3/sqrt(61),
+                6/sqrt(61)
+            ),
+            #vm
+            {
+                (0, 0): 3/sqrt(13),
+                (0, 1): 0,
+                (0, 2): 2/sqrt(13),
+                (0, 3): -5/sqrt(13),
+
+                (1, 0): -6/sqrt(793),
+                (1, 1): 26/sqrt(793),
+                (1, 2): 9/sqrt(793),
+                (1, 3): 10/sqrt(793),
+
+                (2, 0): -4/sqrt(61),
+                (2, 1): -3/sqrt(61),
+                (2, 2): 6/sqrt(61),
+                (2, 3): -34/sqrt(61),
+
+                (3, 0): 0,
+                (3, 1): 0,
+                (3, 2): 0,
+                (3, 3): 1,
+            },
+            #pm
+            {
+                # T = tan(30 * pi / 360)
+                # B = -tan(30 * pi / 360)
+                # R = 16 * tan(30 * pi / 360) / 9
+                # L = -16 * tan(30 * pi / 360) / 9
+                (0, 0): 1 / (16 * tan(30 * pi / 360) / 9),
+                (0, 1): 0,
+                (0, 2): 0,
+                (0, 3): 0,
+
+                (1, 0): 0,
+                (1, 1): 1 / (tan(30 * pi / 360)),
+                (1, 2): 0,
+                (1, 3): 0,
+
+                (2, 0): 0,
+                (2, 1): 0,
+                (2, 2): -1.2,
+                (2, 3): -2.2,
 
                 (3, 0): 0,
                 (3, 1): 0,

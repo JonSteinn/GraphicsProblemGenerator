@@ -4,7 +4,7 @@ import random
 from geometry import Point2D, Vector2D
 
 
-def create_tex(problems, title, sw_boundary, ne_boundary):
+def create_tex(problems, title, sw_boundary=Point2D(-25, -25), ne_boundary=Point2D(25, 25)):
     lis = []
     directory = os.path.dirname('tex/out/collision.tex')
     if not os.path.exists(directory):
@@ -82,7 +82,7 @@ def solve(pnt, pnt1, pnt2, vec):
     return solution
 
 
-def generate(sw_boundary, ne_boundary):
+def generate(sw_boundary=Point2D(-25, -25), ne_boundary=Point2D(25, 25)):
     """
     :type sw_boundary: Point2D
     :type ne_boundary: Point2D

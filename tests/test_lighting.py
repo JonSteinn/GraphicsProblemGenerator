@@ -58,6 +58,31 @@ class TestLighting(TestCase):
         self.assertAlmostEqual(s.g, expected.g, delta=1E-5, msg='g')
         self.assertAlmostEqual(s.b, expected.b, delta=1E-5, msg='b')
 
+    def test_solve3(self):
+        s = solve(
+            v_pos=Point3D(0, 1, 1),
+            v_normal=Vector3D(1, -1, 3),
+            c_pos=Point3D(-3, 3, 4),
+            l_pos=Point3D(3, -2, 2),
+            l_a=Color(0, 0, 0),
+            l_d=Color(0.5, 0.3, 0.7),
+            l_s=Color(0.3, 0.8, 0.7),
+            g_a=Color(0.3, 0.2, 0.4),
+            m_a=Color(0.4, 0.7, 0.3),
+            m_d=Color(0.4, 0.7, 0.2),
+            m_s=Color(0.6, 0.6, 0.6),
+            shine=21
+        )
+        expected = Color(
+            r=0.3067022520099555,
+            g=0.4365837630415202,
+            b=0.3522745356466035
+        )
+
+        self.assertAlmostEqual(s.r, expected.r, delta=1E-5, msg='r')
+        self.assertAlmostEqual(s.g, expected.g, delta=1E-5, msg='g')
+        self.assertAlmostEqual(s.b, expected.b, delta=1E-5, msg='b')
+
     def test_generate(self):
         for _i in range(100):
             g = generate()

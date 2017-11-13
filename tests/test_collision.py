@@ -92,6 +92,25 @@ class TestCollision(TestCase):
         self.assertEqual(sol['reflection'], expected[2],
                          "reflection should be {0} but is {1}".format(expected[2], sol['reflection']))
 
+    def test_solve6(self):
+        p = Point2D(8, 5)
+        p1 = Point2D(1, 5)
+        p2 = Point2D(9, 0)
+        v = Vector2D(-3, -1)
+        sol = solve(p, p1, p2, v)
+        expected = (
+            Fraction(35, 23),
+            Point2D(Fraction(79, 23), Fraction(80, 23)),
+            Vector2D(Fraction(-37, 89), Fraction(279, 89))
+        )
+        self.assertTrue(sol['does_hit'], 'should hit')
+        self.assertEqual(sol['t_hit'], expected[0],
+                         "t_hit should be {0} but is {1}".format(expected[0], sol['t_hit']))
+        self.assertEqual(sol['p_hit'], expected[1],
+                         "p_hit should be {0} but is {1}".format(expected[1], sol['p_hit']))
+        self.assertEqual(sol['reflection'], expected[2],
+                         "reflection should be {0} but is {1}".format(expected[2], sol['reflection']))
+
     def test_generate1(self):
         for i in range(250):
             g = generate(Point2D(-25, -25), Point2D(25, 25))

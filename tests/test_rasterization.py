@@ -38,6 +38,21 @@ class TestRasterization(TestCase):
         self.assertAlmostEqual(expected[1], s[1])
         self.assertAlmostEqual(expected[2], s[2])
 
+    def test_solve3(self):
+        s = solve(
+            p=Point2D(8, 5, False),
+            p1=Point2D(7, 3, False),
+            v1=(4, 4, 4),
+            p2=Point2D(5, 7, False),
+            v2=(12, 12, 12),
+            p3=Point2D(13, 9, False),
+            v3=(7, 7, 7)
+        )
+        expected = (6.0, 6.0, 6.0)
+        self.assertAlmostEqual(expected[0], s[0])
+        self.assertAlmostEqual(expected[1], s[1])
+        self.assertAlmostEqual(expected[2], s[2])
+
     def test_generate(self):
         for _i in range(100):
             g = generate()
