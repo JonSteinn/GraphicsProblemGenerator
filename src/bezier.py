@@ -57,12 +57,17 @@ def generate():
     t_start = random.randint(0, 15)
     t_end = random.randint(t_start + 2, 100)
     t_mid = random.randint(t_start + 1, t_end - 1)
-    pnts = [
-        Point3D(random.randint(-150, 150), random.randint(-150, 150), random.randint(-150, 150)),
-        Point3D(random.randint(-150, 150), random.randint(-150, 150), random.randint(-150, 150)),
-        Point3D(random.randint(-150, 150), random.randint(-150, 150), random.randint(-150, 150)),
-        Point3D(random.randint(-150, 150), random.randint(-150, 150), random.randint(-150, 150))
-    ]
+    while True:
+        pnts = [
+            Point3D(random.randint(-150, 150), random.randint(-150, 150), random.randint(-150, 150)),
+            Point3D(random.randint(-150, 150), random.randint(-150, 150), random.randint(-150, 150)),
+            Point3D(random.randint(-150, 150), random.randint(-150, 150), random.randint(-150, 150)),
+            Point3D(random.randint(-150, 150), random.randint(-150, 150), random.randint(-150, 150))
+        ]
+        for pnt in pnts:
+            if len(list(filter(lambda z: z == pnt, pnts))) > 1:
+            	continue
+        break
     return {'t_start': t_start, 't_mid': t_mid, 't_end': t_end, 'pnts': pnts}
 
 
