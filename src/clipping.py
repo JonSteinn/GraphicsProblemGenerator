@@ -154,11 +154,12 @@ def trivial_reject(bits1, bits2):
 
 def bit_and(b1, b2):
     """
-    :type b1:
-    :type b2:
+    :type b1: int
+    :type b2: int
     """
     if b1 == 1 and b2 == 1:
         return 1
+    return 0
 
 
 def clip(win, pnt, bits, dx, dy):
