@@ -8,6 +8,8 @@ Generates random computer graphics math problem `.tex` files.
 * Lighting (Phong lighting, single light)
 * Rasterization
 * Bezier curves
+* Window to viewport mapping
+* Clipping
 
 ## How to run
 In the root directory:
