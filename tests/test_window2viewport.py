@@ -11,22 +11,19 @@ class TestWindow2Viewport(TestCase):
     def test_solve1(self):
         self.assertEqual(
             solve((-10, 30, 50, 80), (0, 1600, 0, 1200), Point2D(-5, 70, False)),
-            Point2D(200, 800, False),
-            False
+            Point2D(200, 800, False)
         )
 
     def test_solve2(self):
         self.assertEqual(
             solve((-10, 30, 50, 80), (0, 1600, 0, 1200), Point2D(20, 65, False)),
-            Point2D(1200, 600, False),
-            False
+            Point2D(1200, 600, False)
         )
 
     def test_solve3(self):
         self.assertEqual(
             solve((-1, 1, -1, 1), (0, 640, 0, 480), Point2D(0.5, 0.0, False)),
-            Point2D(480, 240, False),
-            False
+            Point2D(480, 240, False)
         )
 
     def test_generate(self):
