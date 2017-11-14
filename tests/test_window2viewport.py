@@ -34,3 +34,6 @@ class TestWindow2Viewport(TestCase):
             g = generate()
             self.assertTrue((lambda z: z[0] < z[1] and z[2] < z[3])(g['v']))
             self.assertTrue((lambda z: z[0] < z[1] and z[2] < z[3])(g['w']))
+            p = g['p']
+            self.assertTrue(g['w'][0] <= p.x <= g['w'][1])
+            self.assertTrue(g['w'][2] <= p.y <= g['w'][3])

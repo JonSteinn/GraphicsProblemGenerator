@@ -2,6 +2,7 @@ import sys
 
 import bezier
 import camera
+import clipping
 import collision
 import lighting
 import rasterization
@@ -14,4 +15,5 @@ if __name__ == '__main__':
     lighting.create_tex(count, 'Lighting')
     rasterization.create_tex(count, 'Rasterization')
     bezier.create_tex(count, 'Bezier')
-    window2viewport.create_tex(count, 'stuff')
+    window2viewport.create_tex(count, 'Window to Viewport')
+    clipping.create_tex(count, 'Clipping')

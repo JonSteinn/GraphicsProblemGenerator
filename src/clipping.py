@@ -1,6 +1,69 @@
 import random
-
+import os
 from geometry import Point2D
+
+
+def create_tex(problems, title):
+    lis = []
+    directory = os.path.dirname('tex/out/clipping.tex')
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    with open('tex/out/clipping.tex', 'w+') as f:
+        with open('tex/template/start_content.tex', 'r') as tmp_f:
+            for line in enumerate(tmp_f):
+                if line[0] == 23:
+                    f.write(line[1].replace('X', title))
+                else:
+                    f.write(line[1])
+        for i in range(problems):
+            gen = generate()
+            f.write('\\subsection*{{Problem {0}}}\n'.format(i))
+            f.write('\\label{{psec:{0}}}\n'.format(i))
+            f.write('\\addcontentsline{{toc}}{{subsection}}{{\\nameref{{psec:{0}}}}}\n'.format(i))
+            win = gen['win']
+            p1 = gen['p1']
+            p2 = gen['p2']
+            lis.append((win, p1, p2))
+            f.write(single_problem(win, p1, p2))
+        f.write('\\section{Solutions}\n')
+        for prob in enumerate(lis):
+            f.write('\\subsection*{{Solution {0}}}\n'.format(prob[0]))
+            f.write('\\label{{ssec:{0}}}\n'.format(prob[0]))
+            f.write('\\addcontentsline{{toc}}{{subsection}}{{\\nameref{{ssec:{0}}}}}\n'.format(prob[0]))
+            w, p1, p2 = prob[1]
+            f.write('{0}'.format(single_solution(solve(w, p1, p2))))
+        f.write('\\end{document}\n')
+
+
+def single_problem(window, pnt1, pnt2):
+    """
+    :type window: tuple of int
+    :type pnt1: Point2D
+    :type pnt2: Point2D
+    """
+    return 'Consider the window $W(l,r,b,t) = {0}$. ' \
+           'A line has two endpoints, $P1={1}$ and $P2={2}$. ' \
+           'Use the Cohen Sutherland clipping algorithm ' \
+           'to clip the line against the window. ' \
+           'Show the steps the algorithm takes\n'.format(window, pnt1, pnt2)
+
+
+def single_solution(sol):
+    """
+    :type sol: dict
+    """
+    steps = sol['steps']
+    dx = sol['dx']
+    dy = sol['dy']
+    s = 'dx = {0} and dy = {1}\\\\\n'.format(dx, dy)
+    for i in range(steps):
+        st = 'step{0}'.format(i)
+        values = sol[st]
+        s += '{0}:\\\\\np1 = {1}, b1 = {2}\\\\\np2 = {3}, b2 = {4}\\\\\n'.format(
+            st, values[0], "".join(map(str, values[1])), values[2], "".join(map(str, values[3]))
+        )
+    s += '{0}\\\\\n'.format(sol['result'])
+    return s
 
 
 def generate():
@@ -46,36 +109,6 @@ def solve(win, pnt1, pnt2):
         pnt1, clipped = clip(win, pnt1, bits1, dx, dy)
         if not clipped:
             pnt2, clipped = clip(win, pnt2, bits2, dx, dy)
-    solution['steps'] = len(steps)
-    for step in enumerate(steps):
-        solution['step{0}'.format(step[0])] = step[1]
-    return solution
-
-
-def solve2(win, pnt1, pnt2):
-    """
-    :param win: left-right-bottom-top
-    :type win: tuple of int
-    :type pnt1: Point2D
-    :type pnt2: Point2D
-    """
-    dx = pnt2.x - pnt1.x
-    dy = pnt2.y - pnt1.y
-    steps = []
-    solution = {'dx': dx, 'dy': dy}
-    while True:
-        bits1 = get_bits(win, pnt1)
-        bits2 = get_bits(win, pnt2)
-        steps.append((pnt1, bits1, pnt2, bits2))
-        if trivial_accept(bits1, bits2):
-            solution['result'] = 'trivial accept'
-            break
-        if trivial_reject(bits1, bits2):
-            solution['result'] = 'trivial reject'
-            break
-        pnt2, clipped = clip(win, pnt2, bits2, dx, dy)
-        if not clipped:
-            pnt1, clipped = clip(win, pnt1, bits1, dx, dy)
     solution['steps'] = len(steps)
     for step in enumerate(steps):
         solution['step{0}'.format(step[0])] = step[1]
@@ -146,15 +179,3 @@ def clip(win, pnt, bits, dx, dy):
     if bits[3] == 1:
         return Point2D(pnt.x + (win[3] - pnt.y) * dx / dy, win[3], False), True
     return pnt, False
-
-"""
-g = generate()
-for _g_ in g.items():
-    print(_g_[0], _g_[1])
-s = solve(g['win'], g['p1'], g['p2'])
-for _x_ in s.items():
-    print(_x_[0], end=' ')
-    if type(_x_[1]) == tuple:
-        print(_x_[1][0], _x_[1][1], _x_[1][2], _x_[1][3])
-    else:
-        print(_x_[1])"""

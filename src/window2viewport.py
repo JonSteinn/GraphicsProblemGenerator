@@ -38,13 +38,13 @@ def create_tex(problems, title):
 
 def single_problem(window, viewport, point):
     """
-    :type window:
-    :type viewport:
-    :type point:
+    :type window: tuple of int
+    :type viewport: tuple of int
+    :type point: Point2D
     """
     return 'Points are drawn in a 2D world window $(W.l, W.r, W.b, W.t) = {0}$. ' \
            'In which pixels on a ${1} \\times {2}$ viewport (bottom left corner ' \
-           '$(0,0)$) will ${3}$ be rendered?'.format(window, viewport[1], viewport[3], point)
+           '$(0,0)$) will ${3}$ be rendered?\n'.format(window, viewport[1], viewport[3], point)
 
 
 def generate():
