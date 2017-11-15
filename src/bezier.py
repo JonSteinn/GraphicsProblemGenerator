@@ -64,9 +64,13 @@ def generate():
             Point3D(random.randint(-150, 150), random.randint(-150, 150), random.randint(-150, 150)),
             Point3D(random.randint(-150, 150), random.randint(-150, 150), random.randint(-150, 150))
         ]
+        continue_outer = False
         for pnt in pnts:
             if len(list(filter(lambda z: z == pnt, pnts))) > 1:
-            	continue
+            	continue_outer = True
+            	break
+        if continue_outer:
+        	continue
         break
     return {'t_start': t_start, 't_mid': t_mid, 't_end': t_end, 'pnts': pnts}
 
